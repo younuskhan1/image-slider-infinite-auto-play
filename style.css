@@ -47,11 +47,23 @@
     /* the below 7.5 is given according to your pc's screen's width and number of images. This below 
     7.5 point can increase or decrease the animation speed. the bigger the point the animation 
     is quicker on the other hand the smaller the point the animation is slower. You have to find out the 
-    point by calculation otherwise some images of last places will not be showed. */
+    point by calculation otherwise some images of last places will not be showed. Move the .slide-track leftward
+    by setting minus figure */
 
     transform: translateX(calc(-250px * 7.4));
+    /*At left hand side/leftwards, your passed total width is (-250px * 7.4) = 1850px. 
+    But in fact, at .slide-track class you can see that the total passable width is (250px * 12) = 3000px.
+    why is this difference between to conditions and how do you manage this difference?
+    
+    Answer: My laptop's pc's screen width is 1280px. I took 90% of 1280px which is 1152px.
+    total passable width is 3000px is a misconception because 90% of 1280px which is 1152px
+    is already existed without animation at my pc's screen. I have to animate just 
+    (3000px - 1152px) = 1848px within 40 seconds.You can show 1152px width with its 5 images
+    without animation and you have animate 1848px width with its other 7 images.  */
    }
 }
+
+/*you can use the below format of @keyframes for animation of scroll in stead of above format*/
 
 /* @keyframes scroll {
     from{
@@ -91,7 +103,7 @@ img{
 /* when I hover on the image then the transform property will be translated to z axis 14xp;
 the image is spread all around 18px */
 img:hover{
-    transform: translateZ(18px);
+    transform: translateZ(20px);
 }
 /*---------------- Gradient shadow -----------*/
 
