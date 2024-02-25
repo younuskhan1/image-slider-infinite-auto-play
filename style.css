@@ -2,7 +2,7 @@
     margin: 0px;
     padding: 0px;
 }
-body{
+.parent-div{
     min-height: 100vh;
     display: grid;
     place-items: center;
@@ -13,31 +13,74 @@ body{
     position: relative;
     width: 90%;
     display: grid;
+    /* the inner elements of .slider div is vertically centered with the below
+    place-items:center css  */
     place-items: center;
     overflow: hidden;
+    /* border: 1px solid red; */
 }
 .slide-track{
+    /* display:flex; because the images are need to  arrange in a row horizontally */
     display: flex;
-    width: calc(250px * 18);
+    /* .slider's div height is 250px and our images number is 12 so our required space is 
+    horizontally (250px * 12) */
+    width: calc(250px * 12);
+    /* we can use any name in place of scroll word. Here scroll is an animation name. */
+    /* 40s is the total required time to pass total 12 images horizontally */
+    /* what will be animated? the whole .slide-track{} will be animated because "animation: scroll 40s linear infinite;" 
+    is written inside it. */
     animation: scroll 40s linear infinite;
+    /* border: 2px solid blue; */
 }
 .slide-track:hover{
+    /* if I hover on .slide-track, the animation will be stopped. */
     animation-play-state: paused;
 }
+
+
 @keyframes scroll{
    0%{
-    transform: translateX(0);
+    transform: translateX(0px); 
    }
    100%{
-    transform: translateX(calc(-250px * 9));
+
+    /* the below 7.5 is given according to your pc's screen's width and number of images. This below 
+    7.5 point can increase or decrease the animation speed. the bigger the point the animation 
+    is quicker on the other hand the smaller the point the animation is slower. You have to find out the 
+    point by calculation otherwise some images of last places will not be showed. */
+
+    transform: translateX(calc(-250px * 7.4));
    }
 }
+
+/* @keyframes scroll {
+    from{
+        transform: translateX(0);
+    } 
+    to {
+        transform: translateX(calc(-250px * 7.4));
+    }
+} */
+
+
+
 .slide{
     height: 200px;
     width: 250px;
     display: flex;
     align-items: center;
+    /* border: 1px solid yellow; */
+    /* showing gap between two cards with below padding */
     padding: 15px;
+    /* To spread around the 
+    image you have to spread around the image's parent div firstly.So image's parent div is made spread
+    with below perspective: 100px;
+    Each 3D element with z>0 becomes larger; each 3D-element with z<0 becomes
+    smaller. The strength of the effect is determined by the value of this property.
+    Large values of perspective cause a small transformation; small values of perspective
+    cause a large transformation.The parts of the 3D elements that are behind the user
+    — i.e. their z-axis coordinates are greater than the value of the
+    perspective CSS property — are not drawn. */
     perspective: 100px;
 }
 img{
@@ -45,27 +88,35 @@ img{
     height: 100%;
     transition: transform 1s;
 }
+/* when I hover on the image then the transform property will be translated to z axis 14xp;
+the image is spread all around 18px */
 img:hover{
-    transform: translateZ(20px);
+    transform: translateZ(18px);
 }
 /*---------------- Gradient shadow -----------*/
 
 .slider::before,
 .slider::after{
+    /* tht shadow is created from the right side to left side that means the shadow id visible 
+    to left side of the content so .slider::before is ok. there is no need to rotate the
+    shadow for .slider::before. But you have to rotate the shadow for .slider::after upto 180degree.
+    */
     background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%,
     rgba(255, 255, 255, 0) 100%);
     content: "";
     height: 100%;
     position: absolute;
-    width: 8%;
+    width: 10%;
     z-index: 2;
 }
 .slider::before{
+    /* there is no need to reverse the above shadow's position */
     left: 0;
     top: 0;
 }
 .slider::after{
     right: 0;
     top: 0;
+    /* the above shadow is reversed by rotating 180degree*/
     transform: rotateZ(180deg);
 }
