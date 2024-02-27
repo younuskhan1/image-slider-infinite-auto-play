@@ -132,3 +132,8 @@ img:hover{
     /* the above shadow is reversed by rotating 180degree*/
     transform: rotateZ(180deg);
 }
+.second-section{
+    height: 100vh;
+    width: 100%;
+    background-color: red;
+}
